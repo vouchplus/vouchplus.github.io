@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard - Vouch+</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+  <!-- Navigation -->
+  <nav class="bg-gray-800 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="index.html" class="text-xl font-bold text-blue-400">
+            <i class="fas fa-star mr-2"></i>Vouch+
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+          <a href="search.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Search Users</a>
+          <a href="leaderboard.html" class="text-blue-400 px-3 py-2 rounded-md text-sm font-medium">Leaderboard</a>
+          <div id="user-nav" class="hidden">
+            <a href="profile.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Profile</a>
+            <a href="vouch.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Create Vouch</a>
+            <button id="logout-btn" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+          </div>
+          <button id="login-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+            <i class="fab fa-discord mr-2"></i>Login with Discord
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="bg-gray-800 rounded-lg p-6">
+      <h1 class="text-3xl font-bold mb-6">
+        <i class="fas fa-trophy mr-2"></i>Leaderboard
+      </h1>
+      
+      <!-- Filter Options -->
+      <div class="mb-6 flex flex-wrap gap-4">
+        <select id="sort-by" class="bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="reputation">Sort by Reputation</option>
+          <option value="vouches">Sort by Vouches Received</option>
+          <option value="positive">Sort by Positive Vouches</option>
+          <option value="recent">Sort by Recent Activity</option>
+        </select>
+        <input 
+          type="number" 
+          id="limit-input" 
+          placeholder="Limit results" 
+          value="50" 
+          min="10" 
+          max="200"
+          class="bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-32"
+        >
+        <button id="refresh-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
+          <i class="fas fa-sync-alt mr-2"></i>Refresh
+        </button>
+      </div>
+
+      <!-- Leaderboard Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-gray-700 rounded-lg p-4 text-center">
+          <div id="total-leaderboard-users" class="text-2xl font-bold text-blue-400">-</div>
+          <div class="text-sm text-gray-400">Total Users</div>
+        </div>
+        <div class="bg-gray-700 rounded-lg p-4 text-center">
+          <div id="avg-reputation" class="text-2xl font-bold text-green-400">-</div>
+          <div class="text-sm text-gray-400">Average Reputation</div>
+        </div>
+        <div class="bg-gray-700 rounded-lg p-4 text-center">
+          <div id="top-reputation" class="text-2xl font-bold text-yellow-400">-</div>
+          <div class="text-sm text-gray-400">Highest Reputation</div>
+        </div>
+      </div>
+
+      <!-- Leaderboard List -->
+      <div id="leaderboard-content" class="space-y-2">
+        <!-- Leaderboard entries will be loaded here -->
+      </div>
+
+      <!-- Pagination -->
+      <div id="pagination" class="hidden mt-6 flex justify-center">
+        <button id="prev-page" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">
+          <i class="fas fa-chevron-left mr-1"></i>Previous
+        </button>
+        <span id="page-info" class="px-4 py-2 text-gray-300"></span>
+        <button id="next-page" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md ml-2">
+          Next<i class="fas fa-chevron-right ml-1"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Loading Spinner -->
+  <div id="loading-spinner" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-gray-800 rounded-lg p-6 flex items-center space-x-4">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      <span>Loading leaderboard...</span>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+  <script type="module" src="js/config.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/leaderboard.js"></script>
+</body>
+</html>

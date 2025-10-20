@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - Vouch+</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+  <!-- Navigation -->
+  <nav class="bg-gray-800 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="index.html" class="text-xl font-bold text-blue-400">
+            <i class="fas fa-star mr-2"></i>Vouch+
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+          <a href="search.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Search Users</a>
+          <a href="leaderboard.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Leaderboard</a>
+          <div id="user-nav" class="hidden">
+            <a href="profile.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Profile</a>
+            <a href="vouch.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Create Vouch</a>
+            <button id="logout-btn" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+          </div>
+          <button id="login-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+            <i class="fab fa-discord mr-2"></i>Login with Discord
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="bg-gray-800 rounded-lg p-6">
+      <!-- Profile Header -->
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center space-x-4">
+          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+            <i class="fas fa-user text-2xl"></i>
+          </div>
+          <div>
+            <h1 id="profile-username" class="text-2xl font-bold">Loading...</h1>
+            <p id="profile-display-name" class="text-gray-400">Loading...</p>
+          </div>
+        </div>
+        <div id="profile-actions" class="hidden">
+          <button id="vouch-user-btn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
+            <i class="fas fa-star mr-2"></i>Vouch for User
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-gray-700 rounded-lg p-4 text-center">
+          <div id="profile-reputation" class="text-3xl font-bold text-blue-400 mb-1">-</div>
+          <div class="text-sm text-gray-400">Reputation</div>
+        </div>
+        <div class="bg-gray-700 rounded-lg p-4 text-center">
+          <div id="profile-vouches-received" class="text-3xl font-bold text-green-400 mb-1">-</div>
+          <div class="text-sm text-gray-400">Vouches Received</div>
+        </div>
+        <div class="bg-gray-700 rounded-lg p-4 text-center">
+          <div id="profile-vouches-given" class="text-3xl font-bold text-yellow-400 mb-1">-</div>
+          <div class="text-sm text-gray-400">Vouches Given</div>
+        </div>
+        <div class="bg-gray-700 rounded-lg p-4 text-center">
+          <div id="profile-member-since" class="text-lg font-bold text-purple-400 mb-1">-</div>
+          <div class="text-sm text-gray-400">Member Since</div>
+        </div>
+      </div>
+
+      <!-- Vouch Breakdown -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-700 rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-3 text-green-400">
+            <i class="fas fa-thumbs-up mr-2"></i>Positive Vouches
+          </h3>
+          <div id="positive-vouches-count" class="text-2xl font-bold">-</div>
+        </div>
+        <div class="bg-gray-700 rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-3 text-red-400">
+            <i class="fas fa-thumbs-down mr-2"></i>Negative Vouches
+          </h3>
+          <div id="negative-vouches-count" class="text-2xl font-bold">-</div>
+        </div>
+      </div>
+
+      <!-- Vouches Received -->
+      <div class="bg-gray-700 rounded-lg p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-4">
+          <i class="fas fa-inbox mr-2"></i>Vouches Received
+        </h3>
+        <div id="vouches-received-list" class="space-y-3">
+          <!-- Vouches will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Vouches Given -->
+      <div class="bg-gray-700 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">
+          <i class="fas fa-paper-plane mr-2"></i>Vouches Given
+        </h3>
+        <div id="vouches-given-list" class="space-y-3">
+          <!-- Vouches will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Loading Spinner -->
+  <div id="loading-spinner" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-gray-800 rounded-lg p-6 flex items-center space-x-4">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      <span>Loading profile...</span>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+  <script type="module" src="js/config.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/user-profile.js"></script>
+</body>
+</html>
