@@ -31,7 +31,7 @@ export async function login() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'discord',
     options: {
-      redirectTo: window.location.origin,
+      redirectTo: "https://vouchplus.github.io",
     },
   })
   showLoading(false)
