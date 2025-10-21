@@ -6,6 +6,7 @@
   <title>Vouch+ - Gaming Reputation System</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
   <!-- Navigation -->
@@ -17,7 +18,10 @@
             <i class="fas fa-star mr-2"></i>Vouch+
           </a>
         </div>
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-4 nav-inner">
+          <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
           <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
           <a href="search.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Search Users</a>
           <a href="leaderboard.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Leaderboard</a>
@@ -37,10 +41,10 @@
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-center mb-8">
-      <h1 class="text-4xl font-bold mb-4">Welcome to Vouch+</h1>
-      <p class="text-xl mb-6">Gaming, reputation, vouches, and trust. Done right.</p>
-      <div id="hero-stats" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-center mb-8 hero-section">
+      <h1 class="text-4xl font-bold mb-4 text-responsive-xl">Welcome to Vouch+</h1>
+      <p class="text-xl mb-6 text-responsive">Gaming, reputation, vouches, and trust. Done right.</p>
+      <div id="hero-stats" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 hero-stats">
         <div class="bg-white bg-opacity-20 rounded-lg p-4">
           <div class="text-2xl font-bold" id="total-users">-</div>
           <div class="text-sm">Total Users</div>
@@ -57,7 +61,7 @@
     </div>
 
     <!-- Quick Actions -->
-    <div id="quick-actions" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div id="quick-actions" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 quick-actions">
       <div class="bg-gray-800 rounded-lg p-6">
         <h3 class="text-xl font-semibold mb-4">
           <i class="fas fa-user-plus mr-2"></i>Vouch for Someone
@@ -107,11 +111,12 @@
   </div>
 
   <!-- Toast Notifications -->
-  <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+  <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 toast-container"></div>
 
   <script type="module" src="js/config.js"></script>
   <script type="module" src="js/auth.js"></script>
   <script type="module" src="js/utils.js"></script>
   <script type="module" src="js/home.js"></script>
+  <script src="js/mobile-nav.js"></script>
 </body>
 </html>

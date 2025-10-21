@@ -6,6 +6,7 @@
   <title>User Profile - Vouch+</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
   <!-- Navigation -->
@@ -17,7 +18,10 @@
             <i class="fas fa-star mr-2"></i>Vouch+
           </a>
         </div>
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-4 nav-inner">
+          <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
           <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
           <a href="search.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Search Users</a>
           <a href="leaderboard.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Leaderboard</a>
@@ -38,7 +42,7 @@
   <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <div class="bg-gray-800 rounded-lg p-6">
       <!-- Profile Header -->
-      <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center justify-between mb-6 profile-header">
         <div class="flex items-center space-x-4">
           <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
             <i class="fas fa-user text-2xl"></i>
@@ -48,7 +52,7 @@
             <p id="profile-display-name" class="text-gray-400">Loading...</p>
           </div>
         </div>
-        <div id="profile-actions" class="hidden">
+        <div id="profile-actions" class="hidden btn-group">
           <button id="vouch-user-btn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
             <i class="fas fa-star mr-2"></i>Vouch for User
           </button>
@@ -56,7 +60,7 @@
       </div>
 
       <!-- Profile Stats -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 profile-stats">
         <div class="bg-gray-700 rounded-lg p-4 text-center">
           <div id="profile-reputation" class="text-3xl font-bold text-blue-400 mb-1">-</div>
           <div class="text-sm text-gray-400">Reputation</div>
@@ -76,7 +80,7 @@
       </div>
 
       <!-- Vouch Breakdown -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 card-grid">
         <div class="bg-gray-700 rounded-lg p-4">
           <h3 class="text-lg font-semibold mb-3 text-green-400">
             <i class="fas fa-thumbs-up mr-2"></i>Positive Vouches
@@ -122,11 +126,12 @@
   </div>
 
   <!-- Toast Notifications -->
-  <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+  <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2 toast-container"></div>
 
   <script type="module" src="js/config.js"></script>
   <script type="module" src="js/auth.js"></script>
   <script type="module" src="js/utils.js"></script>
   <script type="module" src="js/user-profile.js"></script>
+  <script src="js/mobile-nav.js"></script>
 </body>
 </html>
